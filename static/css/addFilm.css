@@ -1,0 +1,25 @@
+.name-input {
+    padding: 0.6rem 1.2rem;
+    color: #444;
+    font-size: 1.5rm;
+}
+.name-label{
+    position: absolute;
+    top: 0.5rem;
+    left:0.9rem;
+    color: rgba(0,0,0,0.5);
+    font-size: 1.0rem;
+    transition: 0.4s all;
+    padding-inline: 0.25rem;
+}
+
+.name-input:focus~.name-label,
+.name-input:valid~.name-label{
+    top:-1.0rem;
+    left: 0.5rem;
+    background-color: #fff;
+    font-size: 1rem;
+}
+.wrapper{
+    position: relative;
+}

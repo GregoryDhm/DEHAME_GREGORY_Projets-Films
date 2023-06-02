@@ -1,0 +1,54 @@
+.film-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px;
+  }
+  
+  .film-image {
+    width: 30%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .film-image img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .film-info {
+    padding: 20px;
+  }
+  
+  .film-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .film-description {
+    margin-bottom: 10px;
+  }
+  
+  .film-year, .film-director, .film-actor {
+    margin-bottom: 5px;
+  }
+  
+  .delete-button {
+    background-color: #e53e3e !important;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+.delete-button:hover {
+    background-color: #c53030 !important;
+}

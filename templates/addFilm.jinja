@@ -1,0 +1,110 @@
+{% extends "./socle/base.jinja" %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/addFilm.css">
+{% endblock head %}
+{% block content %}
+<div class="flex justify-center items-center h-screen">
+    {% if requestMethod == "GET" %}
+        <div class="w-full max-w-md">
+            <h1 class="text-center text-2xl mb-6">Formulaire</h1>
+            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="#" method="post" enctype="multipart/form-data" >
+                <div class="mb-4 wrapper">
+                    <input class="name-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nomFilm" name="nomFilm" type="text" placeholder="" required>
+                    <label class="name-label block text-gray-700 font-bold mb-2 " for="nomFilm">
+                        Nom du film
+                    </label>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="Description">
+                        Description :
+                    </label>
+                    <!--<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Description" name="Description" type="text" placeholder="Fast and Furious ou Rapides et Dangereux au Québec, (The Fast and the Furious), est un film américano-allemand réalisé par Rob Cohen et sorti en 2001." required>-->
+                    <textarea class="name-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-y" placeholder="Fast and Furious ou Rapides et Dangereux au Québec, (The Fast and the Furious), est un film américano-allemand réalisé par Rob Cohen et sorti en 2001." id="description" name="description" spellcheck="true"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="Description">
+                        Année de sortie :
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="annee" name="annee" type="number" min="1900" max="2030" step="1" placeholder="2001">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="acteurs">
+                        deux acteurs principaux :
+                    </label>
+                    <div class="flex items-center">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="acteur1" name="acteur1" type="text" placeholder="Paul Walker">
+                        <div class="mx-2"></div>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="acteur2" name="acteur2" type="text" placeholder="Vin Diesel">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="Description">
+                        Réalisateur :
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="realisateur" name="realisateur" type="text" placeholder="Rob Cohen">
+                </div>
+
+                <!-- Image -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="image">
+                        Image :
+                    </label>
+                    <div class="flex items-center">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" name="image" type="file" accept="image/*" onchange="afficherImage(event)">
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" type="button" onclick="supprimerImage()">Supprimer</button>
+                    </div>
+                    <div id="image-preview"></div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Envoyer">
+                </div>
+
+            </form>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+
+var imagePreview = document.getElementById('image-preview');
+var imageInput = document.getElementById('image');
+
+function afficherImage(event) {
+    var imageInput = event.target;
+
+    // Vérifier si un fichier a été sélectionné
+    if (imageInput.files && imageInput.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            // Créer un élément d'image pour afficher l'aperçu
+            var imageElement = document.createElement('img');
+            imageElement.setAttribute('src', e.target.result);
+            imageElement.setAttribute('class', 'w-32 h-auto mt-2');
+
+            // Effacer le contenu précédent de l'aperçu de l'image
+            imagePreview.innerHTML = '';
+
+            // Ajouter l'élément d'image à l'aperçu
+            imagePreview.appendChild(imageElement);
+        }
+
+        // Lire le fichier en tant que URL de données
+        reader.readAsDataURL(imageInput.files[0]);
+    }
+}
+
+function supprimerImage() {
+    // Effacer le contenu de l'aperçu de l'image
+    imagePreview.innerHTML = '';
+    
+    // Effacer le nom de l'image dans l'input file
+    imageInput.value = '';
+}
+</script>
+{% endblock script %}

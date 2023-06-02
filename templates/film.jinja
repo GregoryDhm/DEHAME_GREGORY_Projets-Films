@@ -1,0 +1,34 @@
+{% extends "./socle/base.jinja" %}
+{% block titre %}{{ data[1] }}{% endblock titre %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/film.css">
+{% endblock head %}
+{% block content %}
+    <div class="film-details-container">
+        <div class="film-image">
+            <!--<img src="{{ affiche }}" alt="Affiche du film">-->
+            <img src="data:image/jpeg;base64,{{ image_base64 }}" alt="Affiche du film">
+        </div>
+        <div class="film-info">
+            <h2 class="film-title">{{ data[0] }}</h2>
+            {% if data[1] %}
+                <p class="film-description">{{ data[1] }}</p>
+            {% endif %}
+            {% if data[2] %}
+                <p class="film-year">Année de sortie : {{ data[2] }}</p>
+            {% endif %}
+            {% if data[3] %}
+                <p class="film-director">Réalisateur : {{ data[3] }}</p>
+            {% endif %}
+            {% if data[4] %}
+                <p class="film-actor">Acteur principal : {{ data[4] }}</p>
+            {% endif %}
+            {% if data[5] %}
+                <p class="film-actor">Acteur secondaire : {{ data[5] }}</p>
+            {% endif %}
+            <form action="{{ url_for('films_app.deleteFilm', id=id) }}" method="POST" class="inline">
+                <button colortype="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?')" class="delete-button">Supprimer</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

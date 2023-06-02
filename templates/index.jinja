@@ -1,0 +1,26 @@
+{% extends "./socle/base.jinja" %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/home.css">
+{% endblock head %}
+{% block content %}
+    <div class="container">
+        <h1 class="title">Projet Web Python: Flask</h1>
+        <h2 class="subtitle">Site de gestion de films - CRUD</h2>
+        <p class="description">Ce site permet la gestion de films comprenant les éléments suivants:</p>
+        <ul id="listeDb">
+            <li>Image (Affiche)</li>
+            <li>Titre</li>
+            <li>Description</li>
+            <li>Année</li>
+            <li>Acteurs</li>
+            <li>Réalisation/Producteur</li>
+        </ul>
+        <p class="description">Vous pouvez stocker les données dans la base de données de votre choix ou dans un fichier plat.</p>
+        <p class="description">Le site a au minimum 2 pages:</p>
+        <ul>
+            <li>Liste de tous les films, avec au minimum l'affiche et le titre du film</li>
+            <li>Page de visualisation complète d'un film</li>
+        </ul>
+        <p class="description">De plus, le site propose la détection des visages sur l'affiche du film, semblable à ce qui est proposé sur le serveur PLEX.</p>
+    </div>
+{% endblock content %}

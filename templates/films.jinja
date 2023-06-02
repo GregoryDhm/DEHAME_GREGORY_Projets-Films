@@ -1,0 +1,44 @@
+{% extends "./socle/base.jinja" %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/films.css">
+{% endblock head %}
+{% block content %}
+    <div class="sort-container">
+        <form action="" method="get">
+            <label for="sort">Trier par :</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="titre" {% if sort == "titre" %} selected {% endif %}>Titre</option>
+                <option value="annee_sortie" {% if sort == "annee_sortie" %} selected {% endif %}>Année de sortie</option>
+            </select>
+            <select name="order" id="order" onchange="this.form.submit()">
+                <option value="" {% if order != "desc" %} selected {% endif %}>&#x25B2;</option>
+                <option value="desc" {% if order == "desc" %} selected {% endif %}>&#x25BC;</option>
+            </select>
+        </form>
+    </div>
+    <div class="film-grid">
+        {% for row in data %}
+            <div class="film-card {% if row[6] is none or row[6] == "" %}no-img{% endif %}">
+            <a href="/film/{{row[7]}}">
+                {% if row[6] is not none and row[6] != "" %}
+                    <!--<img class="film-img" src="{{ cheminAffiche }}{{ row[6] }}" alt="{{ row[0] }}">-->
+                    <img class="film-img" src="data:image/jpeg;base64,{{ row[6] }}" alt="Affiche du film">
+                {% endif %}
+                <div class="film-info {% if row[6] is none or row[6] == "" %}always-show{% endif %}">
+                    <h2>{{ row[0] }}</h2>
+            </a>
+                    <!--description-->
+                    <!--<p>{{ row[1] }}</p>-->
+                    {% if row[2] %}<p>Année de sortie : {{ row[2] }}</p>{% endif %}
+                    {% if row[3] %}<p>Réalisateur : {{ row[3] }}</p>{% endif %}
+                    {% if row[4] or row[5] %}<p>Acteurs : {{ row[4] }} {% if row[4] and row[5] %} - {% endif %} {{ row[5] }}</p>{% endif %}
+                    <br>
+                    <div class="film-actions">
+                        <a href="{{ url_for('films_app.editFilm', id=row[7]) }}" class="film-action-edit">Edit</a>
+                        <a href="{{ url_for('films_app.deleteFilm', id=row[7]) }}" class="film-action-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
