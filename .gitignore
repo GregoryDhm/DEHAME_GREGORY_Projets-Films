@@ -1,0 +1,7 @@
+# Fichiers de cache Python
+/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Fichiers de configuration Poetry
+poetry.lock
